@@ -1,0 +1,178 @@
+.person{
+    height: 100vh;
+    width: 100%;
+}
+
+.bimage{
+    height: 100%;
+    background-image: url('../../Assets/juet.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(4px) brightness(25%);
+}
+
+.auth{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    color: aliceblue;
+}
+
+.auth h1{
+    font-size: 60px;
+}
+
+.auth h2{
+    font-size: 30px;
+    font-style:oblique;
+    font-weight: normal;
+}
+
+.auth-container{
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    height: auto;
+    width: 90%;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+.auth-container-2{
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container-2 p{
+    color: aliceblue;
+    text-align: center;
+}
+
+.auth-box{
+    border: solid #fff;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.4);
+    box-shadow: rgba(237, 214, 214, 0.35) 0px 5px 20px; 
+}
+
+.auth-2{
+    display: grid;
+    gap: 30px;
+    padding: 10px 40px;
+}
+
+.auth-2 label{
+    color: antiquewhite;
+    font-size: 20px;
+}
+
+.auth-inp{
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom:solid antiquewhite;
+    padding: 0 0 5px 10px;
+    font-size: 20px;
+    color: antiquewhite;
+    width: 110%;
+}
+
+.auth-inp::placeholder{
+    color: antiquewhite;
+}
+
+.auth-btn{
+    background: none;
+    color: antiquewhite;
+    font-size: 20px;
+    border: solid antiquewhite;
+    outline: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    transition: 0.3s ease;
+}
+
+.auth-btn:hover{
+    cursor: pointer;
+    color: black;
+    background: antiquewhite;
+    transition: 0.2s ease;
+}
+
+.auth-select{
+    width: 59%;
+    margin-left: 5%;
+}
+
+.auth-select option{
+    color: aliceblue;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.8);
+    font-size: 17px;
+    overflow-y: scroll;
+}
+
+.auth-select option:-webkit-scrollbar{
+    display: none;
+}
+
+.auth-container-otp{
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container-otp h2{
+    color: aliceblue;
+    text-align: center;
+    font-size: 20px;
+}
+
+.otp-box{
+    border: solid #fff;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.4);
+    box-shadow: rgba(237, 214, 214, 0.35) 0px 5px 20px; 
+}
+
+.otp-box p{
+    color: aliceblue;
+    text-align: center;
+    font-size: 17px;
+}
+
+.otp-inp{
+    width: 100%;
+    text-align: center;
+}
+
+.otp-btn{
+    width: 80%;
+    transform: translateX(10%);
+    margin: 20px 0;
+}
+
+#fp{
+    text-align: left;
+    padding-left: 1.5rem;
+    text-decoration: underline;
+    color: aqua;
+    cursor: pointer;
+}
+
+#fp:hover{
+    color: blue;
+}
+
+.uc{
+    text-transform: uppercase;
+}
