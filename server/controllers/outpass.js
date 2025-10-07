@@ -54,7 +54,7 @@ export const createOutpass = async (req, res) => {
     const pending = new Pending({ ...outpassData });
 
     await Promise.all([newOutpass.save(), pending.save()]);
-    return res.status(200).json("Outpass saved successfully");
+    return res.status(200).json({message : "Outpass saved successfully"});
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ message: "Couldn't post Outpass" });
