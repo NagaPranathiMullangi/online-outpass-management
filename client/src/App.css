@@ -1,21 +1,22 @@
-html,body{
-  height:100%;
+html,
+body {
+  height: 100%;
 }
 
-*{
+* {
   box-sizing: border-box;
 
   ::-webkit-scrollbar {
     width: 5px;
   }
-  
+
   ::-webkit-scrollbar-track {
-    background: #000; 
+    background: #000;
     border-radius: 10px;
   }
-   
+
   ::-webkit-scrollbar-thumb {
-    background: antiquewhite; 
+    background: antiquewhite;
     border-radius: 10px;
   }
 }

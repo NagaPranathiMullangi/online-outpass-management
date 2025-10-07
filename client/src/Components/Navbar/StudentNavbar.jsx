@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch } from "react-redux";
 
 import { setCurrentUser } from "../../actions/currentUser";
-import { postAppliedOutpasses, showPrevOutpasses } from '../../actions/outpassMovement';
+
 import './Navbar.css'
 
 const StudentNavbar = () => {
@@ -11,27 +11,32 @@ const StudentNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  const User = JSON.parse(localStorage.getItem("Profile"))
+  /*const User = JSON.parse(localStorage.getItem("Profile"))
   const enrollData = User.result.enrollment
 
   useEffect(() => {
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
     dispatch(postAppliedOutpasses({enrollment: enrollData}))
     dispatch(showPrevOutpasses({enrollment: enrollData}))
-  }, [dispatch, enrollData]);
+  }, [dispatch, enrollData]);*/
   
   const handlePendingOutpasses = () => {
-    dispatch(postAppliedOutpasses({enrollment: enrollData}))
+    navigate("/StudentPendingOutpasses");
   }
 
   const handlePrevOutpasses = () => {
-    dispatch(showPrevOutpasses({enrollment: enrollData}))
+    navigate("/StudentPrevOutpasses");
   }
 
+
+
+
+ 
     const handleLogout = () => {
       dispatch({ type: 'LOGOUT' })
+      dispatch( setCurrentUser(null))
       navigate('/')
-      setCurrentUser(null)
+     
     }
 
   return (

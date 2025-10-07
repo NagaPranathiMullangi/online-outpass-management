@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import WardenPendingOutpass from "../../Components/Outpasses/WardenPendingOutpass"
@@ -9,15 +9,25 @@ import "./WardenPendingOutpasses.css"
 
 const WardenPendingOutpasses = () => {
 
+    const dispatch = useDispatch();
+
     const outpassList = useSelector(state => state.outpassMovementReducer.data)
 
-    const dispatch = useDispatch()
+   const [loading,setLoading] = useState(true);
 
     const User = JSON.parse(localStorage.getItem("Profile"))
     const employeeData = User.result.employee
 
     useEffect(() => {
-        dispatch(showWardenPendingOutpasses({employee: employeeData}))
+
+        const fetchData = async ()=>{
+            setLoading(true);
+            await dispatch(showWardenPendingOutpasses({employee: employeeData}))
+            setLoading(false);
+        }
+
+        fetchData();
+        
       }, [dispatch, employeeData]);
 
     return(
@@ -25,13 +35,24 @@ const WardenPendingOutpasses = () => {
             <WardenNavbar/>
             <h1>Find your Pending Outpasses</h1>
             <div className="woutpasses">
-            {
-                    !outpassList ? <h1>Loading...</h1> : Array.isArray(outpassList) && outpassList.length > 0 ? (
-                        [...outpassList].reverse().map((outpass) => (
-                            <WardenPendingOutpass outpass={outpass} key={outpass._id}/>
-                        ))
-                    ) : <h1>No pending outpasses found</h1>
-                }
+
+          {
+  loading ? (
+    <h1>Loading ....</h1>
+  ) : !Array.isArray(outpassList) ? (
+    <h1>Invalid data format</h1>
+  ) : outpassList.length === 0 ? (
+    <h1>No pending outpasses found</h1>
+  ) : (
+    [...outpassList].reverse().map((outpass) => (
+      <WardenPendingOutpass outpass={outpass} key={outpass._id} />
+    ))
+  )
+}
+
+
+
+            
             </div>
         </div>
     )

@@ -17,7 +17,7 @@ const mailer = (studentEmail, qrCodeURL, imageUrl) => {
     port: process.env.PORT || 5000,
     secure: false,
     auth: {
-      user: process.env.USER,
+      user: "nagapranathinagapranathi@gmail.com",
       pass: process.env.PASS,
     },
   });
@@ -27,7 +27,7 @@ const mailer = (studentEmail, qrCodeURL, imageUrl) => {
   const mailOptions = {
     from: {
       name: "Outpass System",
-      address: process.env.USER,
+      address: "nagapranathinagapranathi@gmail.com",
     },
     to: studentEmail,
     subject: "OUTPASS APPROVED...!!",
@@ -36,7 +36,7 @@ const mailer = (studentEmail, qrCodeURL, imageUrl) => {
     <p>Your outpass has been approved by the warden.</p>
     <p>Please find your QR code below for verification:</p>
     <img src="cid:qrCodeImage" alt="QR Code" style="width:200px; height:200px;" />
-    <p>You can also access your consent image by clicking <a href="${imageUrl}" target="_blank">Parent Consent</a>.</p>
+    <p>You can also access your consent image by clicking <a href="${imageUrl.trim()}" target="_blank">Parent Consent</a>.</p>
     <p>Scan this QR code at the gate for verification.</p>
     <p>Best regards,<br>Student Outpass System</p>
   `,
@@ -59,7 +59,13 @@ const mailer = (studentEmail, qrCodeURL, imageUrl) => {
   });
 };
 
-export const Approve = async (enrollment, studentEmail, fromDate, toDate, ImageURL) => {
+export const Approve = async (
+  enrollment,
+  studentEmail,
+  fromDate,
+  toDate,
+  ImageURL
+) => {
   // Data for QR code with proper alignment
   const qrData = `
 Student ID: ${enrollment}
@@ -67,7 +73,7 @@ Status: Approved
 Email: ${studentEmail}
 From: ${fromDate}
 To: ${toDate}
-Image Link: ${ImageURL}
+Image Link: ${ImageURL.trim()}
 `;
 
   // Generate QR Code

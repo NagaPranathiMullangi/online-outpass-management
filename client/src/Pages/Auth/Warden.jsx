@@ -81,6 +81,7 @@ const Warden = () => {
                 <input
                   type="number"
                   name="otp"
+                
                   placeholder="Enter the OTP"
                   className="auth-inp otp-inp"
                   onChange={(e) => {
@@ -106,6 +107,7 @@ const Warden = () => {
                     type="text"
                     placeholder="Employee Number"
                     className="auth-inp uc"
+                    value={employee}
                     onChange={(e) => {
                       setEmployee(e.target.value.toUpperCase());
                     }}
@@ -114,6 +116,7 @@ const Warden = () => {
                   <input
                     type="password"
                     placeholder="Password"
+                    value={password}
                     className="auth-inp"
                     onChange={(e) => {
                       setPassword(e.target.value);
@@ -135,6 +138,7 @@ const Warden = () => {
                     type="text"
                     placeholder="Full Name"
                     className="auth-inp uc"
+                    value={name}
                     onChange={(e) => {
                       setName(e.target.value.toUpperCase());
                     }}
@@ -144,6 +148,7 @@ const Warden = () => {
                     type="text"
                     placeholder="Employee Number"
                     className="auth-inp uc"
+                    value={employee}
                     onChange={(e) => {
                       setEmployee(e.target.value.toUpperCase());
                     }}
@@ -153,6 +158,7 @@ const Warden = () => {
                     type="email"
                     placeholder="Email Address @gmail.com"
                     className="auth-inp"
+                    value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
@@ -162,6 +168,7 @@ const Warden = () => {
                     type="password"
                     placeholder="Password"
                     className="auth-inp"
+                    value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}

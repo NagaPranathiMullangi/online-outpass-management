@@ -1,16 +1,16 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch } from "react-redux";
 
 import { setCurrentUser } from "../../actions/currentUser";
-import { showWardenPendingOutpasses, showWardenPreviousOutpasses } from '../../actions/outpassMovement'
+
 import './Navbar.css'
 
 const WardenNavbar = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const User = JSON.parse(localStorage.getItem("Profile"))
+ /* const User = JSON.parse(localStorage.getItem("Profile"))
   const employeeData = User.result.employee
 
   useEffect(() => {
@@ -18,19 +18,22 @@ const WardenNavbar = () => {
     dispatch(showWardenPendingOutpasses({employee: employeeData}))
     dispatch(showWardenPreviousOutpasses({employee: employeeData}))
   }, [dispatch, employeeData]);
-  
+  */
   const handlePendingOutpasses = () => {
-    dispatch(showWardenPendingOutpasses({employee: employeeData}))
+    navigate('/WardenPendingOutpasses')
   }
 
   const handlePreviousOutpasses = () => {
-    dispatch(showWardenPreviousOutpasses({employee: employeeData}))
+    navigate('/WardenPrevOutpasses')
   }
   
+
+
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' })
-      navigate('/')
-      setCurrentUser(null)
+    dispatch( setCurrentUser(null))
+    navigate('/')
+   
   }
 
   return (

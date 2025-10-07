@@ -23,6 +23,7 @@ export const sendOutpassDetails = (movementData, navigate) => async (dispatch) =
 export const sendWOutpassDetails = (movementData, navigate) => async (dispatch) => {
     try {
         const { data } = await api.sendOutpassDetails(movementData)
+        console.log("data",{data});
         dispatch({type: 'FETCH-OUTPASS-DETAILS', payload: data})
         navigate('/WardenPendingOutpassDetails')
     } catch (error) {

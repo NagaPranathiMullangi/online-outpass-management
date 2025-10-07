@@ -8,12 +8,15 @@ import "./WardenOutpass.css"
 
 const WardenPendingOutpass = ({outpass}) => {
 
+    console.log("came into component");
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const handlePassClick = () => {
+    const handlePassClick = async () => {
+        console.log(outpass);
         const outpassId = outpass.outpassId
-        dispatch(sendWOutpassDetails({ outpassId }, navigate))
+         await dispatch(sendWOutpassDetails({ outpassId }, navigate))
     }
 
     // const from = new Date(outpass.fromDate)

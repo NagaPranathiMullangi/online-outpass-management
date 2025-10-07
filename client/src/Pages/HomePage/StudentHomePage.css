@@ -19,13 +19,13 @@
     transform: translate(-50%, -50%);
     z-index: 2;
     width: 80%;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     color: aliceblue;
 }
 
 .s-home-info h1{
-    font-size: 60px;
+    font-size: 50px;
 }
 
 .s-home-info h2{
@@ -43,6 +43,7 @@
     width: 60%;
     text-align: center;
     color: aliceblue;
+    margin-top: 20px;
 }
 
 .sfunction{

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const PrevOutpassSchema = mongoose.Schema({
   name: { type: String },
   enrollment: { type: String },
-  room: { type: Number },
+  room: { type: String },
   duration: { type: Number },
   fromDate: { type: Date },
   toDate: { type: Date },
@@ -13,6 +13,7 @@ const PrevOutpassSchema = mongoose.Schema({
   outpassId: { type: String },
   evaluation: { type: Boolean },
   ImageURL: { type: String },
+  employeeId: { type: String },
 });
 
 export default mongoose.model(

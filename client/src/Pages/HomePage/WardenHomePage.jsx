@@ -1,30 +1,30 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 import WardenNavbar from '../../Components/Navbar/WardenNavbar'
-import { showWardenPendingOutpasses, showWardenPreviousOutpasses } from '../../actions/outpassMovement'
+//import { showWardenPendingOutpasses, showWardenPreviousOutpasses } from '../../actions/outpassMovement'
 
 import "./WardenHomePage.css"
 
 const WardenHomePage = () =>{
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const User = JSON.parse(localStorage.getItem("Profile"))
-    const employeeData = User.result.employee
+  //  const dispatch = useDispatch()
+    //const User = JSON.parse(localStorage.getItem("Profile"))
+   // const employeeData = User.result.employee
 
-    useEffect(() => {
+   /* useEffect(() => {
         dispatch(showWardenPendingOutpasses({employee: employeeData}))
         dispatch(showWardenPreviousOutpasses({employee: employeeData}))
-      }, [dispatch, employeeData]);
+      }, [dispatch, employeeData]);*/
 
     const handleWardenPending = () => {
-        dispatch(showWardenPendingOutpasses({employee: employeeData}))
+        //dispatch(showWardenPendingOutpasses({employee: employeeData}))
         navigate('/WardenPendingOutpasses')
     }
 
     const handleWardenPrev = () => {
-        dispatch(showWardenPreviousOutpasses({employee: employeeData}))
+       // dispatch(showWardenPreviousOutpasses({employee: employeeData}))
         navigate('/WardenPrevOutpasses')
     }
 

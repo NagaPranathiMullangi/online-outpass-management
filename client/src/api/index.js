@@ -23,7 +23,7 @@ export const changeWardenPass = (fpData) => API.post('/forgot-pass/change-warden
 export const postAppliedOutpasses = (movementData) => API.post('/move-outpass/post', movementData)
 export const sendOutpassDetails = (movementData) => API.post('/move-outpass/send-details', movementData)
 export const showWardenPendingOutpasses = (movementData) => API.post('/move-outpass/show-warden-pending', movementData)
-export const approveOutpasses = (movementData) => API.post('/move-outpass/approve', movementData)
+export const approveOutpasses = (movementData) => {console.log("routs page"); return API.post('/move-outpass/approve', movementData)}
 export const rejectOutpasses = (movementData) => API.post('/move-outpass/reject', movementData)
 export const showWardenPreviousOutpasses = (movementData) => API.post('/move-outpass/show-prev', movementData)
 export const sendPrevOutpassDetails = (movementData) => API.post('/move-outpass/send-prev-details', movementData)

@@ -12,7 +12,7 @@ const Form = () => {
   const navigate = useNavigate();
   const User = JSON.parse(localStorage.getItem("Profile"));
 
-  const [room, setRoom] = useState(0);
+  const [room, setRoom] = useState("");
   const [duration, setDuration] = useState(0);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
@@ -30,6 +30,15 @@ const Form = () => {
 
     // Create FormData to handle file and other inputs
     const formData = new FormData();
+    /* FormData is a special object that stores key-value pairs.
+It is not a plain object or array, but it behaves like 
+a collection of key-value pairs.
+You can access its data using methods like entries(), get(), or forEach().
+directly cant print the formData
+
+The FormData object is used to send both text fields
+ and files in a multipart/form-data format.
+*/
     formData.append("name", User.result.name);
     formData.append("enrollment", User.result.enrollment);
     formData.append("room", room);
@@ -54,11 +63,26 @@ const Form = () => {
       <div className="form-box">
         <form className="outpass-form" onSubmit={handleApply}>
           <p className="form-text">Fill out this form to apply for outpass</p>
-          <input type="text" name="fname" value={User.result.name} className="inp fname" required disabled />
-          <input type="text" name="enroll" value={User.result.enrollment} className="inp enr" required disabled />
           <input
-            type="number"
+            type="text"
+            name="fname"
+            value={User.result.name}
+            className="inp fname"
+            required
+            disabled
+          />
+          <input
+            type="text"
+            name="enroll"
+            value={User.result.enrollment}
+            className="inp enr"
+            required
+            disabled
+          />
+          <input
+            type="text"
             name="room"
+          value={room}
             placeholder="Room Number"
             className="inp room"
             onChange={(e) => setRoom(e.target.value)}
@@ -67,6 +91,7 @@ const Form = () => {
           <input
             type="number"
             name="days"
+           //value={duration}
             placeholder="Duration"
             className="inp days"
             onChange={(e) => setDuration(e.target.value)}
@@ -78,6 +103,7 @@ const Form = () => {
               type="date"
               id="from"
               name="from"
+              value={fromDate}
               placeholder="From"
               className="inp date"
               onChange={(e) => setFromDate(e.target.value)}
@@ -90,17 +116,25 @@ const Form = () => {
               type="date"
               id="to"
               name="to"
+              value={toDate}
               placeholder="To"
               className="inp date"
               onChange={(e) => setToDate(e.target.value)}
               required
             />
           </label>
-          <input type="text" name="hostel" value={User.result.hostel} className="inp hostel-no" disabled />
+          <input
+            type="text"
+            name="hostel"
+            value={User.result.hostel}
+            className="inp hostel-no"
+            disabled
+          />
           <input
             type="text"
             name="purpose"
             placeholder="Purpose of Leave"
+            value={purpose}
             className="inp purpose"
             onChange={(e) => setPurpose(e.target.value)}
             required
@@ -108,6 +142,7 @@ const Form = () => {
           <input
             type="text"
             name="adress"
+            value={address}
             placeholder="Address on Leave"
             className="inp address"
             onChange={(e) => setAddress(e.target.value)}
@@ -119,9 +154,17 @@ const Form = () => {
               type="file"
               id="consent"
               name="image"
-              accept=".png, .jpg, .jpeg, .pdf"
+              accept=".png, .jpg, .jpeg, .pdf" // this checks only file extensions not actual type
               className="file"
-              onChange={(e) => setConsentFile(e.target.files[0])} // Capture the file
+              onChange={(e) =>
+                setConsentFile(e.target.files[0])
+              } /* e.target.files is filelist object if multiple 
+               FileList { 
+                0: File {name: "photo1.jpg", size: 120000, type: "image/jpeg"},
+                1: File {name: "photo2.png", size: 98000, type: "image/png"},
+                length: 2
+              }*/
+              //multiple not given know then only it allows one file to upload
               required
             />
           </label>

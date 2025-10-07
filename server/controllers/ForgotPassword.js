@@ -35,7 +35,7 @@ export const sendWardenOtp = async (req, res) => {
             return res.status(404).json({ message: "Invalid credentials" });
         }
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return res.status(500).json({ message: "Cannot send OTP" });
     }
 };
@@ -65,7 +65,7 @@ export const verifyWardenOtp = async (req, res) => {
             return res.status(404).json({message: "incorrect otp"})
         }
     } catch (error) {
-        console.error(error);
+        //console.error(error);
         return res.status(500).json({message: "something went wrong..."})
     }
 }
@@ -105,7 +105,7 @@ const mailer = (email, generatedOTP) => {
         port: process.env.PORT || 5000,
         secure: false, 
         auth: {
-          user: process.env.USER,
+          user: 'nagapranathinagapranathi@gmail.com',
           pass: process.env.PASS,
         },
       });
@@ -113,7 +113,7 @@ const mailer = (email, generatedOTP) => {
       const mailOptions = {
         from: {
             name: 'Outpass System',
-            address: process.env.USER
+            address: 'nagapranathinagapranathi@gmail.com'
         },
         to: email,
         subject: "OTP for changing password",

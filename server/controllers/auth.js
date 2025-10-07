@@ -30,6 +30,7 @@ export const studentVerification = async (req, res) => {
 export const studentSignup = async (req, res) => {
   const { name, enrollment, email, password, hostel, otp } = req.body;
   try {
+    //if block is not needed le
     if (!studentVerification) {
       return res.status(404).json({ message: "User Verification failed" });
     }
