@@ -157,7 +157,33 @@ The FormData object is used to send both text fields
               accept=".png, .jpg, .jpeg, .pdf" // this checks only file extensions not actual type
               className="file"
               onChange={(e) =>
-                setConsentFile(e.target.files[0])
+              {
+                const file = e.target.files[0];
+      const allowedTypes = ["image/png", "image/jpeg", "application/pdf"];
+      const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
+
+      if (!file) {
+        alert("Please select a file.");
+        return;
+      }
+
+      // Validate MIME type
+      if (!allowedTypes.includes(file.type)) {
+        alert("Invalid file type. Please upload a PNG, JPG, or PDF file.");
+        e.target.value = ""; // Reset the input value
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        alert("File size exceeds the 5 MB limit.");
+        e.target.value = ""; // Reset the input value
+        return;
+      }
+
+      // If all validations pass, set the file
+      setConsentFile(file);
+              }
+               
               } /* e.target.files is filelist object if multiple 
                FileList { 
                 0: File {name: "photo1.jpg", size: 120000, type: "image/jpeg"},

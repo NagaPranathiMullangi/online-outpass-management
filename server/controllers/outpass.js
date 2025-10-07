@@ -1,46 +1,64 @@
 import outpass from "../models/outpass.js";
 import Pending from "../models/PendingOutpass.js";
 import cloudinary from "../middlewares/cloudinary.js";
+import streamifier from "streamifier";
 
 export const createOutpass = async (req, res) => {
-  const outpassData = req.body;
-
   try {
-    // await newOutpass.save();
-    // await POutpass.save();
+    const outpassData = req.body;
 
-    /* req.file.path:
-This is the path to the uploaded file on the server, provided by the multer middleware.
-The file was uploaded to the server's temporary directory by multer.
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).json({ message: "File not uploaded" });
+    }
 
-cloudinary.uploader.upload:
-This uploads the file to Cloudinary.
-The folder: "ecommerce_products" option specifies the folder in Cloudinary where the file will be stored.
+    const buffer = req.file.buffer;
 
-result:
-The result object contains metadata about the uploaded file, including its URL.
-d */
+    // --- Magic bytes check ---
+    const fileHex = buffer.slice(0, 4).toString("hex").toLowerCase();
+    const allowedSignatures = {
+      "image/jpeg": ["ffd8ff"],
+      "image/png": ["89504e47"],
+      "application/pdf": ["25504446"],
+    };
 
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "ecommerce_products",
+    let isValid = false;
+    for (const sigs of Object.values(allowedSignatures)) {
+      if (sigs.some(sig => fileHex.startsWith(sig))) {
+        isValid = true;
+        break;
+      }
+    }
+
+    if (!isValid) {
+      return res
+        .status(400)
+        .json({ message: "Invalid file type! Only JPG, PNG, PDF allowed." });
+    }
+
+    // --- Upload to Cloudinary ---
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "outpass_parent_consent_proofs" },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      streamifier.createReadStream(buffer).pipe(stream);
     });
 
-    /* result.secure_url:
-This is the secure URL of the uploaded file on Cloudinary. */
-
-    /* It is added to the outpassData object as the ImageURL field. */
     outpassData.ImageURL = result.secure_url;
 
+    // Save to DB
     const newOutpass = new outpass({ ...outpassData });
-    const POutpass = new Pending({ ...outpassData });
+    const pending = new Pending({ ...outpassData });
 
-    await Promise.all([newOutpass.save(), POutpass.save()]);
+    await Promise.all([newOutpass.save(), pending.save()]);
     return res.status(200).json("Outpass saved successfully");
   } catch (error) {
-    console.error(error);
-    return res.status(409).json({ message: "Couldn't post Outpass" });
-  }
-};
+    console.error("Error:", error);
+    return res.status(500).json({ message: "Couldn't post Outpass" });
+  }};
 
 /* The .save() method is necessary when using new Model() to create a document.
 
